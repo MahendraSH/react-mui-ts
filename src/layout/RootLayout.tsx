@@ -1,8 +1,6 @@
 import { FC, useEffect } from "react";
-import Navbar from "../components/navbar";
 import { useAppSelector } from "../app/hooks";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Box, Container } from "@mui/material";
 
 interface RootLayoutProps {}
 
@@ -17,17 +15,7 @@ const RootLayout: FC<RootLayoutProps> = ({}) => {
   if (user.id) {
     return (
       <>
-        <Navbar />
-        <Container
-          sx={{
-            display: "flex",
-            height: "100vh",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Outlet />
-        </Container>
+        <Outlet />
       </>
     );
   }
