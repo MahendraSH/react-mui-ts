@@ -15,7 +15,6 @@ import { useAppDispatch } from "../app/hooks";
 interface SignupProps {}
 
 const Signup: FC<SignupProps> = ({}) => {
-  
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
@@ -92,6 +91,7 @@ const Signup: FC<SignupProps> = ({}) => {
                 type="email"
                 placeholder="email"
                 value={email}
+                autoComplete="off"
                 onChange={(e) => {
                   e.preventDefault();
                   setEmail(e.target.value);
@@ -107,6 +107,7 @@ const Signup: FC<SignupProps> = ({}) => {
                 type="password"
                 placeholder="password"
                 value={password}
+                autoComplete="on"
                 onChange={(e) => {
                   e.preventDefault();
                   setPassword(e.target.value);
