@@ -8,10 +8,10 @@ const AuthLayout: FC<AuthLayoutProps> = ({}) => {
   const naviagte = useNavigate();
   const user = useAppSelector((state) => state.userReducers.user);
   useEffect(() => {
-    if (user.id) {
+    if (user?.id) {
       naviagte("/");
     }
-  }, [user.id]);
+  }, [user?.id]);
 
   return (
     <>

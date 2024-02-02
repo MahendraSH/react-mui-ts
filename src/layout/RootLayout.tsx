@@ -8,11 +8,11 @@ const RootLayout: FC<RootLayoutProps> = ({}) => {
   const user = useAppSelector((state) => state.userReducers.user);
   const naviagte = useNavigate();
   useEffect(() => {
-    if (!user.id) {
+    if (!user?.id) {
       naviagte("/signin");
     }
-  }, [user.id]);
-  if (user.id) {
+  }, [user?.id]);
+  if (user?.id) {
     return (
       <>
         <Outlet />
