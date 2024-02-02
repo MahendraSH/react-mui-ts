@@ -7,12 +7,31 @@ import {
   FormLabel,
   FormControl,
 } from "@mui/material";
-import { FC } from "react";
-import { Link } from "react-router-dom";
+import { FC, useState } from "react";
+import { Link,  } from "react-router-dom";
+import { useAppDispatch } from "../app/hooks";
+import { loginUser } from "../app/user/userSlice";
 
 interface SignInProps {}
 
 const SignIn: FC<SignInProps> = ({}) => {
+
+  const dispatch = useAppDispatch();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const onSubmithandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    const user = {
+      userName: "userName",
+      password,
+      email,
+    };
+    dispatch(loginUser(user));
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <Container
       maxWidth="sm"
@@ -35,10 +54,10 @@ const SignIn: FC<SignInProps> = ({}) => {
       >
         Sigin To Continue
       </Typography>
-      <form className="login-form">
+      <form className="login-form" onSubmit={onSubmithandler}>
         <Box
           sx={{
-            width: { sm: 1, md:400 },
+            width: { sm: 1, md: 400 },
             mt: "4rem",
             mx: "auto",
             display: "flex",
@@ -58,6 +77,11 @@ const SignIn: FC<SignInProps> = ({}) => {
               name="email"
               type="email"
               placeholder="email"
+              value={email}
+              onChange={(e) => {
+                e.preventDefault();
+                setEmail(e.target.value);
+              }}
             />
           </FormControl>
 
@@ -68,9 +92,16 @@ const SignIn: FC<SignInProps> = ({}) => {
               name="password"
               type="password"
               placeholder="password"
+              value={password}
+              onChange={(e) => {
+                e.preventDefault();
+                setPassword(e.target.value);
+              }}
             />
           </FormControl>
-          <Button variant="contained">Login</Button>
+          <Button variant="contained" type="submit">
+            Login
+          </Button>
         </Box>
         <Box sx={{ mx: "auto", p: 2, mt: 1 }}>
           <Typography>
