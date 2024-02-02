@@ -93,6 +93,7 @@ const SignIn: FC<SignInProps> = ({}) => {
               type="password"
               placeholder="password"
               value={password}
+              autoComplete="off"
               onChange={(e) => {
                 e.preventDefault();
                 setPassword(e.target.value);
