@@ -21,7 +21,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
             <Link to={"/contact"}>
               <Button color="inherit">contact</Button>
             </Link>
-            <Link to={"/contact"}>
+            <Link to={"/about"}>
               <Button color="inherit">about</Button>
             </Link>
             <Button
