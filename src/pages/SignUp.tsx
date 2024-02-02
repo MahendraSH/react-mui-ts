@@ -7,12 +7,30 @@ import {
   FormLabel,
   FormControl,
 } from "@mui/material";
-import { FC } from "react";
+import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
+import { registorUser } from "../app/user/userSlice";
+import { useAppDispatch } from "../app/hooks";
 
 interface SignupProps {}
 
 const Signup: FC<SignupProps> = ({}) => {
+  
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const dispacth = useAppDispatch();
+
+  const onSubmithandler = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const user = { email, password, userName };
+
+    dispacth(registorUser(user));
+    setEmail("");
+    setPassword("");
+    setUserName("");
+  };
   return (
     <>
       <Container
@@ -36,7 +54,7 @@ const Signup: FC<SignupProps> = ({}) => {
         >
           Create A Free Account
         </Typography>
-        <form className="login-form">
+        <form className="login-form" onSubmit={onSubmithandler}>
           <Box
             sx={{
               width: { sm: 1, md: 400 },
@@ -53,12 +71,31 @@ const Signup: FC<SignupProps> = ({}) => {
             }}
           >
             <FormControl>
+              <FormLabel>Name</FormLabel>
+              <TextField
+                variant="filled"
+                name="name"
+                type="text"
+                placeholder="user name "
+                value={userName}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setUserName(e.target.value);
+                }}
+              />
+            </FormControl>
+            <FormControl>
               <FormLabel>Email</FormLabel>
               <TextField
                 variant="filled"
                 name="email"
                 type="email"
                 placeholder="email"
+                value={email}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setEmail(e.target.value);
+                }}
               />
             </FormControl>
 
@@ -69,9 +106,16 @@ const Signup: FC<SignupProps> = ({}) => {
                 name="password"
                 type="password"
                 placeholder="password"
+                value={password}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setPassword(e.target.value);
+                }}
               />
             </FormControl>
-            <Button variant="contained">Login</Button>
+            <Button variant="contained" type="submit">
+              Sign Up
+            </Button>
           </Box>
           <Box sx={{ mx: "auto", p: 2, mt: 1 }}>
             <Typography>

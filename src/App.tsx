@@ -7,6 +7,7 @@ import About from "./pages/About";
 import SignIn from "./pages/SignIn";
 import Signup from "./pages/SignUp";
 import AuthLayout from "./layout/AuthLayout";
+import GestRouteLayout from "./layout/GestRouteLayout";
 
 interface AppProps {}
 
@@ -14,10 +15,12 @@ const App: FC<AppProps> = ({}) => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<RootLayout />}>
+        <Route path="/" element={<GestRouteLayout />}>
           <Route index element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
+          <Route element={<RootLayout />}>
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+          </Route>
         </Route>
         <Route element={<AuthLayout />}>
           <Route path="/signin" element={<SignIn />} />
